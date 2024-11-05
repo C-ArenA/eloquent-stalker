@@ -17,7 +17,7 @@ class EnsureValidEnvironment
     {
         $environmentsInOrderFromMostImportant = ['production', 'testing', 'local'];
 
-        if (!in_array(app()['env'], $environmentsInOrderFromMostImportant) ) {
+        if (! in_array(app()['env'], $environmentsInOrderFromMostImportant)) {
             abort(404);
         }
 

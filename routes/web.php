@@ -12,7 +12,6 @@ Route::group([
     /**
      * Eloquent Stalker Routes
      */
-
-    Route::get('', [EloquentStalkerController::class, 'index'])->name(config('eloquent-stalker.prefix') . '.index');
+    Route::get('', [EloquentStalkerController::class, 'index'])->name(config('eloquent-stalker.prefix').'.index');
 
 });
