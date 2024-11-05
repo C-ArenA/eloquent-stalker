@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Eloquent Stalker</title>
-    {{ Vite::useHotFile('vendor/eloquent-stalker/eloquent-stalker.hot')
-        ->useBuildDirectory("vendor/eloquent-stalker")
-        ->withEntryPoints(['resources/css/app.css', 'resources/js/app.js']) }}
+    {{ Vite::useHotFile('vendor/eloquent-stalker/eloquent-stalker.hot')->useBuildDirectory('vendor/eloquent-stalker')->withEntryPoints(['resources/css/app.css', 'resources/js/app.js']) }}
 </head>
 
 <body>
@@ -50,8 +48,7 @@
                 <!-- Sidebar content here -->
                 @foreach ($models as $model)
                     <li>
-                        <a
-                            href="{{ route('eloquent-stalker.index', ['selectedModel' => $model]) }}">{{ $model }}</a>
+                        <a href="{{ url()->current() . '?selectedModel=' . $model }}">{{ $model }}</a>
                     </li>
                 @endforeach
             </ul>
