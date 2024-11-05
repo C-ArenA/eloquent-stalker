@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Eloquent Stalker</title>
     {{ Vite::useHotFile('vendor/eloquent-stalker/eloquent-stalker.hot')
-        ->useBuildDirectory("dist")
+        ->useBuildDirectory("vendor/eloquent-stalker")
         ->withEntryPoints(['resources/css/app.css', 'resources/js/app.js']) }}
 </head>
 
