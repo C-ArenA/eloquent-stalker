@@ -13,7 +13,7 @@ class ModelSchema
         $path = config('eloquent-stalker.models_path');
 
         foreach (scandir($path) as $contentName) {
-            $filename = $path . '/' . $contentName;
+            $filename = $path.'/'.$contentName;
             if (is_dir($filename)) {
                 continue;
             }
@@ -35,14 +35,17 @@ class ModelSchema
         foreach ($this->reflectors as $reflector) {
             $relationships[$reflector->getShortName()] = ModelSchema::getModelReflectionRelationships($reflector);
         }
+
         return $relationships;
     }
+
     public function getModels(): array
     {
         $models = [];
         foreach ($this->reflectors as $reflector) {
             $models[] = $reflector->getShortName();
         }
+
         return $models;
     }
 
@@ -52,9 +55,11 @@ class ModelSchema
         $relationshipMethods = array_filter($methods, function ($method) {
             if ($method->hasReturnType()) {
                 $type = $method->getReturnType()->getName();
+
                 return substr($type, 0, 38) ===
                     substr(\Illuminate\Database\Eloquent\Relations\HasMany::class, 0, 38);
             }
+
             return false;
         });
         $relationships = [];
@@ -72,6 +77,7 @@ class ModelSchema
             ];
             $relationships[] = $relationship;
         }
+
         return $relationships;
     }
 }

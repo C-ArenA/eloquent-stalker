@@ -2,9 +2,9 @@
 
 namespace CArena\EloquentStalker\Tests;
 
+use CArena\EloquentStalker\EloquentStalkerServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use CArena\EloquentStalker\EloquentStalkerServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,7 +13,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn(string $modelName) => 'CArena\\EloquentStalker\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'CArena\\EloquentStalker\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 

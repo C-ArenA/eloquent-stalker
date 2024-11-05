@@ -14,11 +14,12 @@ class EloquentStalkerCommand extends Command
     public function handle(): int
     {
         $this->alert('Modelos');
-        $schema = new ModelSchema();
+        $schema = new ModelSchema;
         $models = $schema->getModels();
         foreach ($models as $model) {
             $this->line($model);
         }
+
         return self::SUCCESS;
     }
 }

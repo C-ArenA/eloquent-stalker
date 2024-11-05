@@ -2,10 +2,10 @@
 
 namespace CArena\EloquentStalker;
 
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
 use CArena\EloquentStalker\Commands\EloquentStalkerCommand;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class EloquentStalkerServiceProvider extends PackageServiceProvider
 {
@@ -23,11 +23,10 @@ class EloquentStalkerServiceProvider extends PackageServiceProvider
             ->hasViews()
             ->hasAssets()
             ->hasCommand(EloquentStalkerCommand::class)
-            ->hasInstallCommand(function (InstallCommand $installCommand){
+            ->hasInstallCommand(function (InstallCommand $installCommand) {
                 $installCommand
                     ->publishConfigFile()
-                    ->publishAssets()
-                    ;
+                    ->publishAssets();
             });
     }
 }
