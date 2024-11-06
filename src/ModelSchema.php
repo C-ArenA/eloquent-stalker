@@ -14,7 +14,7 @@ class ModelSchema
 
         foreach (scandir($path) as $contentName) {
 
-            $filename = $path . '/' . $contentName;
+            $filename = $path.'/'.$contentName;
             $pathinfo = pathinfo($filename);
             if (is_dir($filename) || $pathinfo['extension'] != 'php') {
                 continue;

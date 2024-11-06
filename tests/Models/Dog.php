@@ -9,16 +9,23 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Dog extends Model
 {
-    public function owner(): BelongsTo{
+    public function owner(): BelongsTo
+    {
         return $this->belongsTo(Owner::class);
     }
-    public function toys(): HasMany{
+
+    public function toys(): HasMany
+    {
         return $this->hasMany(Toy::class);
     }
-    public function foodBowl(): HasOne{
+
+    public function foodBowl(): HasOne
+    {
         return $this->hasOne(FoodBowl::class);
     }
-    public function sayGuau(): string{
+
+    public function sayGuau(): string
+    {
         return 'guau';
     }
 }
