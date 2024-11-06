@@ -13,8 +13,10 @@ class ModelSchema
         $path = config('eloquent-stalker.models_path');
 
         foreach (scandir($path) as $contentName) {
-            $filename = $path.'/'.$contentName;
-            if (is_dir($filename)) {
+
+            $filename = $path . '/' . $contentName;
+            $pathinfo = pathinfo($filename);
+            if (is_dir($filename) || $pathinfo['extension'] != 'php') {
                 continue;
             }
 
