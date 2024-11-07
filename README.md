@@ -32,6 +32,10 @@ php artisan vendor:publish --tag="eloquent-stalker-views"
 
 You can define the path to the models directory in the config file. Then you can see the visualizer via the `/eloquent-stalker` route.
 
+You have to make sure the namespace and class name are directly related to the path of the models. Otherwise, it won't work as expected.
+
+This will look inside the app_path()
+
 ## Contributing
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
