@@ -9,15 +9,15 @@ use ReflectionMethod;
 
 class ModelExpert extends ReflectionClass
 {
-    /** @var ModelRelationshipExpert[] $relationshipExperts */
+    /** @var ModelRelationshipExpert[] */
     private array $relationshipExperts = [];
 
     public function __construct(object|string $objectOrClass)
     {
         parent::__construct($objectOrClass);
-        if (!$this->isSubclassOf(Model::class)) {
-            throw new ReflectionException("Is not a model class", 1);
-        };
+        if (! $this->isSubclassOf(Model::class)) {
+            throw new ReflectionException('Is not a model class', 1);
+        }
         $this->setRelationshipExperts();
     }
 
@@ -39,7 +39,8 @@ class ModelExpert extends ReflectionClass
     /**
      * @return ModelRelationshipExpert[]
      */
-    public function getRelationshipExperts(): array{
+    public function getRelationshipExperts(): array
+    {
         return $this->relationshipExperts;
     }
 

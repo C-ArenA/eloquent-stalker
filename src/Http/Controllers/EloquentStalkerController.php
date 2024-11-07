@@ -3,14 +3,13 @@
 namespace CArena\EloquentStalker\Http\Controllers;
 
 use CArena\EloquentStalker\EloquentStalker;
-use CArena\EloquentStalker\ModelSchema;
 use Illuminate\Http\Request;
 
 class EloquentStalkerController
 {
     public function index(Request $request)
     {
-        $stalker = new EloquentStalker();
+        $stalker = new EloquentStalker;
         $models = $stalker->getModels();
         $relationships = $stalker->getRelationships();
         $selectedModel = $request->query('selectedModel');
