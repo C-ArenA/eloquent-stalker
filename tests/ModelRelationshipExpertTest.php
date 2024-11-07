@@ -8,14 +8,14 @@ use CArena\EloquentStalker\Tests\Models\FoodBowl;
 it('creates an instance', function () {
     $modelClassName = Dog::class;
     $relationhipMethodName = 'foodBowl';
-    $instance = new ModelRelationshipExpert($modelClassName . '::' . $relationhipMethodName);
+    $instance = new ModelRelationshipExpert($modelClassName.'::'.$relationhipMethodName);
     expect($instance)->toBeInstanceOf(ModelRelationshipExpert::class);
 });
 
 it('throws an error when method is not from a models relationhip', function () {
     $modelClassName = Dog::class;
     $relationhipMethodName = 'sayGuau';
-    new ModelRelationshipExpert($modelClassName . '::' . $relationhipMethodName);
+    new ModelRelationshipExpert($modelClassName.'::'.$relationhipMethodName);
 })->throws(ReflectionException::class);
 
 it('creates an instance from a reflection method', function () {
@@ -35,9 +35,9 @@ it('returns the relationship type', function () {
     $ownerRelationshipType = 'BelongsTo';
     $toysRelationshipType = 'HasMany';
 
-    $foodBowlRelationshipExpert = new ModelRelationshipExpert($modelClassName . '::' . $foodBowlRelationhipMethodName);
-    $ownerRelationshipExpert = new ModelRelationshipExpert($modelClassName . '::' . $ownerRelationhipMethodName);
-    $toysRelationshipExpert = new ModelRelationshipExpert($modelClassName . '::' . $toysRelationhipMethodName);
+    $foodBowlRelationshipExpert = new ModelRelationshipExpert($modelClassName.'::'.$foodBowlRelationhipMethodName);
+    $ownerRelationshipExpert = new ModelRelationshipExpert($modelClassName.'::'.$ownerRelationhipMethodName);
+    $toysRelationshipExpert = new ModelRelationshipExpert($modelClassName.'::'.$toysRelationhipMethodName);
 
     expect($foodBowlRelationshipExpert->getRelationshipType())->toBe($foodBowlRelationshipType);
     expect($ownerRelationshipExpert->getRelationshipType())->toBe($ownerRelationshipType);

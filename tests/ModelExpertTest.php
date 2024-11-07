@@ -26,7 +26,7 @@ it('collects model relationship experts', function () {
     expect($foodBowlRelationshipExperts[0])->toBeInstanceOf(ModelRelationshipExpert::class);
 });
 
-it('knows the name of the related table', function(){
+it('knows the name of the related table', function () {
     $dogExpert = new ModelExpert(Dog::class);
     expect($dogExpert->getTableName())->toBe('dogs');
 });

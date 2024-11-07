@@ -10,11 +10,11 @@ class ModelRelationshipExpert extends ReflectionMethod
 {
     public ModelExpert $modelExpert;
 
-    public function __construct(object|string $objectOrMethod, string|null $method = null, ModelExpert|null $modelExpert = null)
+    public function __construct(object|string $objectOrMethod, ?string $method = null, ?ModelExpert $modelExpert = null)
     {
         parent::__construct($objectOrMethod, $method);
         if (! ModelRelationshipExpert::isRelationshipMethod($this)) {
-            throw new ReflectionException("El método no es de tipo relationship", 1);
+            throw new ReflectionException('El método no es de tipo relationship', 1);
         }
         if (isset($modelExpert)) {
             $this->modelExpert = $modelExpert;
@@ -23,17 +23,19 @@ class ModelRelationshipExpert extends ReflectionMethod
         }
     }
 
-    public static function fromReflection(ReflectionMethod $method, ModelExpert $modelExpert = null)
+    public static function fromReflection(ReflectionMethod $method, ?ModelExpert $modelExpert = null)
     {
         $className = $method->getDeclaringClass()->getName();
         $methodName = $method->getName();
-        $classMethodName = $className . '::' . $methodName;
+        $classMethodName = $className.'::'.$methodName;
+
         return new self($classMethodName, null, $modelExpert);
     }
 
     public function getRelationshipType(): string
     {
         $explodedRelationshipName = explode('\\', $this->getReturnType()->getName());
+
         return $explodedRelationshipName[count($explodedRelationshipName) - 1];
     }
 
@@ -47,12 +49,13 @@ class ModelRelationshipExpert extends ReflectionMethod
         $modelInstance = $this->modelExpert->newInstance();
         $relationshipMethodName = $this->getName();
         $relatedModelInstance = $modelInstance->$relationshipMethodName()->getModel();
+
         return new ModelExpert($relatedModelInstance);
     }
 
     public static function isRelationshipMethod(ReflectionMethod $method)
     {
-        if (!$method->hasReturnType()) {
+        if (! $method->hasReturnType()) {
             return false;
         }
 

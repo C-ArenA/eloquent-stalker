@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class FoodBowl extends Model
 {
-    public function dog(): BelongsTo{
+    public function dog(): BelongsTo
+    {
         return $this->belongsTo(Dog::class);
     }
 }
