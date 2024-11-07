@@ -36,11 +36,14 @@ class ModelRelationshipExpert extends ReflectionMethod
         $explodedRelationshipName = explode('\\', $this->getReturnType()->getName());
         return $explodedRelationshipName[count($explodedRelationshipName) - 1];
     }
-    public function getModelExpert(): ModelExpert{
+
+    public function getModelExpert(): ModelExpert
+    {
         return $this->modelExpert;
     }
 
-    public function getRelatedModelExpert(): ModelExpert{
+    public function getRelatedModelExpert(): ModelExpert
+    {
         $modelInstance = $this->modelExpert->newInstance();
         $relationshipMethodName = $this->getName();
         $relatedModelInstance = $modelInstance->$relationshipMethodName()->getModel();

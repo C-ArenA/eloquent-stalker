@@ -16,20 +16,11 @@ it('doesnt reflect a class that is not a model', function () {
     new ModelExpert(EloquentStalker::class);
 })->throws(ReflectionException::class);
 
-it('retrieves reflection methods of relationhips', function () {
-    $dogExpert = new ModelExpert(Dog::class);
-    $foodBowlExpert = new ModelExpert(FoodBowl::class);
-    $dogRelationshipMethods = $dogExpert->getRelationshipReflectionMethods();
-    $foodBowlRelationshipMethods = $foodBowlExpert->getRelationshipReflectionMethods();
-    expect(count($dogRelationshipMethods))->toBe(3);
-    expect(count($foodBowlRelationshipMethods))->toBe(1);
-});
-
 it('collects model relationship experts', function () {
     $dogExpert = new ModelExpert(Dog::class);
     $foodBowlExpert = new ModelExpert(FoodBowl::class);
-    $dogRelationshipExperts = $dogExpert->getModelRelationshipExperts();
-    $foodBowlRelationshipExperts = $foodBowlExpert->getModelRelationshipExperts();
+    $dogRelationshipExperts = $dogExpert->getRelationshipExperts();
+    $foodBowlRelationshipExperts = $foodBowlExpert->getRelationshipExperts();
     expect(count($dogRelationshipExperts))->toBe(3);
     expect(count($foodBowlRelationshipExperts))->toBe(1);
     expect($foodBowlRelationshipExperts[0])->toBeInstanceOf(ModelRelationshipExpert::class);

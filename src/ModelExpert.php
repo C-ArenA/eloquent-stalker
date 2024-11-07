@@ -6,36 +6,46 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use ReflectionClass;
 use ReflectionException;
+use ReflectionMethod;
 
 class ModelExpert extends ReflectionClass
 {
+    /** @var ModelRelationshipExpert[] $relationshipExperts */
+    private array $relationshipExperts = [];
+
     public function __construct(object|string $objectOrClass)
     {
         parent::__construct($objectOrClass);
         if (!$this->isSubclassOf(Model::class)) {
             throw new ReflectionException("Is not a model class", 1);
         };
+        $this->setRelationshipExperts();
     }
-    public static function fromReflection(ReflectionClass $reflection){
+
+    public static function fromReflection(ReflectionClass $reflection)
+    {
         return new self($reflection->getName());
     }
 
-    public function getRelationshipReflectionMethods(): array
+    public function setRelationshipExperts()
     {
-        $publicMethods = $this->getMethods(\ReflectionMethod::IS_PUBLIC);
-        return array_filter($publicMethods, [ModelRelationshipExpert::class, 'isRelationshipMethod']);
-    }
-
-    public function getModelRelationshipExperts(): array
-    {
-        $relationshipExperts = [];
-        foreach ($this->getRelationshipReflectionMethods() as $reflectionMethod) {
-            $relationshipExperts[] = ModelRelationshipExpert::fromReflection($reflectionMethod, $this);
+        $publicMethods = $this->getMethods(ReflectionMethod::IS_PUBLIC);
+        foreach ($publicMethods as $method) {
+            if (ModelRelationshipExpert::isRelationshipMethod($method)) {
+                $this->relationshipExperts[] = ModelRelationshipExpert::fromReflection($method, $this);
+            }
         }
-        return $relationshipExperts;
     }
 
-    public function getTableName(): string{
+    /**
+     * @return ModelRelationshipExpert[]
+     */
+    public function getRelationshipExperts(): array{
+        return $this->relationshipExperts;
+    }
+
+    public function getTableName(): string
+    {
         return $this->newInstance()->getTable();
     }
 }

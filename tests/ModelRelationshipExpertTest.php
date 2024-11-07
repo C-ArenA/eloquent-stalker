@@ -18,14 +18,13 @@ it('throws an error when method is not from a models relationhip', function () {
     new ModelRelationshipExpert($modelClassName . '::' . $relationhipMethodName);
 })->throws(ReflectionException::class);
 
-it('creates an instance from a reflection method', function(){
-    $modelExpert = new ModelExpert(FoodBowl::class);
-    $relationshipReflectionMethods = $modelExpert->getRelationshipReflectionMethods();
-    $relationshipExpert = ModelRelationshipExpert::fromReflection($relationshipReflectionMethods[0]);
+it('creates an instance from a reflection method', function () {
+    $relationshipReflectionMethod = new ReflectionMethod(FoodBowl::class . '::' . 'dog');
+    $relationshipExpert = ModelRelationshipExpert::fromReflection($relationshipReflectionMethod);
     expect($relationshipExpert)->toBeInstanceOf(ModelRelationshipExpert::class);
 });
 
-it('returns the relationship type', function(){
+it('returns the relationship type', function () {
     $modelClassName = Dog::class;
 
     $foodBowlRelationhipMethodName = 'foodBowl';
@@ -45,14 +44,14 @@ it('returns the relationship type', function(){
     expect($toysRelationshipExpert->getRelationshipType())->toBe($toysRelationshipType);
 });
 
-it('has a default related model expert', function(){
+it('has a default related model expert', function () {
     $foodBowlRelationshipWithoutDefinedExpert = new ModelRelationshipExpert(Dog::class . '::' . 'foodBowl');
     $modelExpert = $foodBowlRelationshipWithoutDefinedExpert->getModelExpert();
     expect($modelExpert)->toBeInstanceOf(ModelExpert::class);
     expect($modelExpert->getShortName())->toBe('Dog');
 });
 
-it('finds the related model expert', function(){
+it('finds the related model expert', function () {
     $foodBowlRelationship = new ModelRelationshipExpert(Dog::class . '::' . 'foodBowl');
     $relatedModelExpert = $foodBowlRelationship->getRelatedModelExpert();
     expect($relatedModelExpert)->toBeInstanceOf(ModelExpert::class);
