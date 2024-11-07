@@ -16,7 +16,7 @@ class EloquentStalkerModelsCommand extends Command
     public function handle(): int
     {
         $this->alert('Models');
-        $stalker = new EloquentStalker();
+        $stalker = new EloquentStalker;
         $experts = $stalker->getModelExperts();
         $models = [];
         foreach ($experts as $expert) {
@@ -24,7 +24,7 @@ class EloquentStalkerModelsCommand extends Command
                 'name' => $expert->getShortName(),
                 'table' => $expert->getTableName(),
                 'relationships' => count($expert->getRelationshipExperts()),
-                'class' => $expert->getName()
+                'class' => $expert->getName(),
             ];
         }
 

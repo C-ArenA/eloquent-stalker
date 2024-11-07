@@ -7,8 +7,7 @@ use ReflectionClass;
 
 class EloquentStalker
 {
-
-    /** @var ModelExpert[] $modelExperts */
+    /** @var ModelExpert[] */
     public array $modelExperts = [];
 
     public function __construct()
@@ -33,13 +32,15 @@ class EloquentStalker
         foreach ($this->modelExperts as $expert) {
             $models[] = $expert->getShortName();
         }
+
         return $models;
     }
 
     /**
      * @return ModelExpert[]
      */
-    public function getModelExperts(): array{
+    public function getModelExperts(): array
+    {
         return $this->modelExperts;
     }
 
@@ -60,6 +61,7 @@ class EloquentStalker
             }
             $relationships[$expert->getShortName()] = $modelRelationships;
         }
+
         return $relationships;
     }
 }
