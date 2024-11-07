@@ -28,13 +28,37 @@ Optionally, you can publish the views using
 php artisan vendor:publish --tag="eloquent-stalker-views"
 ```
 
+You have to make sure the namespace and class name are directly related to the path of the models. Otherwise, it won't work as expected. We use the app_path() to look for all the existant models in your project.
+
 ## Usage
 
-You can define the path to the models directory in the config file. Then you can see the visualizer via the `/eloquent-stalker` route.
+There are two ways in which you can use this package:
 
-You have to make sure the namespace and class name are directly related to the path of the models. Otherwise, it won't work as expected.
+### Console
 
-This will look inside the app_path()
+You can list all your models with its info using an artisan command we provide for you:
+
+```sh
+php artisan eloquent-stalker:models
+```
+
+You might also want to list all the relationships
+
+```sh
+php artisan eloquent-stalker:relationships
+```
+
+Optionally, you can pass the name of a model to check its relationships
+
+```sh
+php artisan eloquent-stalker:relationships User
+```
+
+### Browser
+
+We provide a route (which you can configure in the config file) that will be shown in development mode. By default, the route will be '/eloquent-stalker'.
+
+![alt text](image.png)
 
 ## Contributing
 
