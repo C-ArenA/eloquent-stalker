@@ -34,7 +34,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="p-3 border">{{ $relationship['model'] }}</div>
+                                <div class="p-3 border">{{ $relationship['relatedModel'] }}</div>
                             </div>
                         @endforeach
                     </div>
